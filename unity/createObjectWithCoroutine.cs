@@ -6,10 +6,11 @@ public class CreateObjectsWithCourutine : MonoBehaviour
 {
     public GameObject[] objs;
 
-    private void Start()
+    private void Update()
     {
         // invoke("CreateObject", 2f);
-        StartCoroutine(Create3DObjects());
+        if(Input.GetKeyUp(KeyCode.U))
+            StartCoroutine(Create3DObjects(2f));
     }
 
     private void CreateObject()
@@ -27,9 +28,9 @@ public class CreateObjectsWithCourutine : MonoBehaviour
         return UnityEngine.Random.Range(0, 10);
     }
 
-    private IEnumerator Create3DObjects()
+    private IEnumerator Create3DObjects(float wait)
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(wait);
         CreateObject();
     }
 }
