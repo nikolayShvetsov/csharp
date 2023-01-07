@@ -9,6 +9,7 @@ public class Test : MonoBehaviour
     public Transform[] targets = new Transform[4];
 
     public float speed = 5.0f;
+    public float rotateSpeed = 5.0f;
 
     void Start()
     {
@@ -27,7 +28,18 @@ public class Test : MonoBehaviour
     {
         for (int i = 0; i < targets.Length; i++)
         {
+
+            if (targets[i] == null)
+                continue;
+
             targets[i].Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
+            targets[i].Rotate(new Vector3(1, 0, 0) * rotateSpeed * Time.deltaTime);
+
+            float posX = targets[i].position.x;
+
+            if (posX > 5f && targets[i].gameObject.name == "Capsule") {
+                Destroy(targets[i].gameObject);
+            }
         }
     }
 }
